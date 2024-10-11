@@ -1,4 +1,4 @@
-from analisadorLexico.key_words_cpp import *
+from lexico.key_words_cpp import *
 import string
 import io
 
