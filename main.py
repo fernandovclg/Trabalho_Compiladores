@@ -3,7 +3,7 @@ from sintatico.analisador import Syntatical_Analysis
 from semantico.analisador import Semantic_Analysis
 
 # Abre o arquivo de código-fonte para análise
-file = open('codigo-teste-2.ssl', 'r', encoding='utf-8')
+file = open('codigo.ssl', 'r', encoding='utf-8')
 
 # Cria a instância do analisador léxico
 lexical = Analise_Lexica(file)
