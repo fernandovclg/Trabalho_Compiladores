@@ -1,0 +1,7 @@
+State,NUMERAL,PLUS,MINUS,TIMES,DIVIDE,LEFT_PARENTHESIS,RIGHT_PARENTHESIS,LEFT_BRACES,RIGHT_BRACES
+0,s5,,,,,s4,,,
+1,,s6,s7,,,,,,
+2,,,,r1,r2,,,,
+3,,,,,,,,,
+4,,,,,,,,,
+5,,,,,,,,,

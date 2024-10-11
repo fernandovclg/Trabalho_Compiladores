@@ -45,12 +45,13 @@ class Analise_Lexica:
         while esquerda <= direita:
             meio = (esquerda + direita) // 2
             if palavras_chave[meio] == nome:
-                return meio
+                return meio  # Retorna o índice correspondente à palavra-chave
             elif palavras_chave[meio] > nome:
                 direita = meio - 1
             else:
                 esquerda = meio + 1
-        return ID
+        return ID  # Se não for uma palavra-chave, retorna o token ID
+
 
     def erro_Lexico(self, token):
         if token == UNKNOWN:
@@ -77,15 +78,22 @@ class Analise_Lexica:
             self.caractere += 1
 
         if self.prox_Caractere == "":
+            print("Token EOF detectado.")
             return EOF
 
         if self.prox_Caractere.isdigit():
-            return self.tratar_Numero(separador)
+            token = self.tratar_Numero(separador)
+            print(f"Token NUMERAL detectado: {token}")
+            return token
 
         if self.prox_Caractere.isalnum() or self.prox_Caractere == '_':
-            return self.tratar_Identificador_Ou_Palavra(separador)
+            token = self.tratar_Identificador_Ou_Palavra(separador)
+            print(f"Token ID ou palavra-chave detectado: {token}")
+            return token
 
-        return self.tratar_Simbolo()
+        token = self.tratar_Simbolo()
+        print(f"Token símbolo detectado: {token}")
+        return token
 
     def tratar_Numero(self, separador):
         numero_Auxiliar = []
@@ -105,9 +113,11 @@ class Analise_Lexica:
             self.caractere += 1
         texto = separador.join(texto_Auxiliar)
         token = self.buscar_Palavra_Chave(texto)
-        if token == ID:
+        if token == ID:  # Se for um identificador, armazena o nome
             self.token_Secundario = self.buscar_Nome(texto)
         return token
+
+
 
     def tratar_Simbolo(self):
         simbolo = self.prox_Caractere
@@ -186,26 +196,26 @@ class Analise_Lexica:
 
 
 
-codigo_teste = """
-int main() {
-    int a = 10;
-    float b = 20.5;
-    if (a < b) {
-        return a + b;
-    } else {
-        return 0;
-    }
-}
-"""
+# codigo_teste = """
+# int main() {
+#     int a = 10;
+#     float b = 20.5;
+#     if (a < b) {
+#         return a + b;
+#     } else {
+#         return 0;
+#     }
+# }
+# """
 
-# Cria um arquivo temporário em memória com o código de teste
-arquivo_teste = io.StringIO(codigo_teste)
+# # Cria um arquivo temporário em memória com o código de teste
+# arquivo_teste = io.StringIO(codigo_teste)
 
-# Cria uma instância da classe Analise_Lexica
-analisador = Analise_Lexica(arquivo_teste)
+# # Cria uma instância da classe Analise_Lexica
+# analisador = Analise_Lexica(arquivo_teste)
 
-# Executa o analisador léxico
-analisador.executar()
+# # Executa o analisador léxico
+# analisador.executar()
 
-# Fecha o arquivo temporário
-arquivo_teste.close()
+# # Fecha o arquivo temporário
+# arquivo_teste.close()

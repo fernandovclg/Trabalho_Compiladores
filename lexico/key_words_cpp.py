@@ -30,3 +30,4 @@ CHARACTER = 28
 STRINGVAL = 29
 TRUE = 30
 FALSE = 31
+# ID = 100  # Um valor diferente de 0
