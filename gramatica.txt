@@ -1,0 +1,84 @@
+P -> LDE
+LDE -> LDE DE | DE
+
+DE -> DF
+   | DV
+   | DM
+   | CL
+
+
+DV -> T LI ';'
+
+DM -> 'using' 'namespace' ID ';'DF -> T ID '(' LP ')' Bp
+
+CL -> 'class' ID '{' LDE '};'
+
+T -> 'int' | 'char' | 'bool' | 'std::string' | 'void' | ID
+
+DT -> 'typedef' T ID ';'
+    | 'struct' ID '{' DC '}' ';'
+    | 'class' ID '{' DC '}' ';'
+
+DF -> T ID '(' LP ')' Bp
+    
+DC -> DC ';' T ID
+    | T ID
+
+LP -> LP ',' T ID | T ID | ε
+B -> '{' LDV LS '}'
+LDV -> LDV DV | DV
+DV -> T LI ';'
+LI -> LI ',' ID | ID
+LS -> LS S | S
+
+S -> DV
+   | ID '=' E ';'
+   | 'if' '(' E ')' S
+   | 'if' '(' E ')' S 'else' S
+   | 'while' '(' E ')' S
+   | 'for' '(' DV ';' E ';' E ')' S
+   | 'return' E ';'
+   | 'break' ';'
+   | 'continue' ';'
+   | B
+
+E -> E '&&' L
+   | E '||' L
+   | L
+
+L -> L '<' R
+   | L '>' R
+   | L '<=' R
+   | L '>=' R
+   | L '==' R
+   | L '!=' R
+   | R
+
+R -> R '+' Y
+   | R '-' Y
+   | Y
+
+Y -> Y '*' F
+   | Y '/' F
+   | Y '%' F
+   | F
+
+F -> '-' F
+   | '!' F
+   | '(' E ')'
+   | ID
+   | NUM
+   | CHR
+   | 'true'
+   | 'false'
+
+
+LE -> LE ',' E | E
+LV -> LV '.' ID | LV '[' E ']' | ID
+
+ID -> [a-zA-Z_][a-zA-Z0-9_]*
+NUMERAL -> [0-9]+
+STRINGVAL -> '"' .*? '"'
+CHARACTER -> '\'' . '\''
+TRUE -> 'true'
+FALSE -> 'false'
